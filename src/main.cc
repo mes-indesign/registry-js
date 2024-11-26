@@ -42,7 +42,7 @@ LPWSTR utf8ToWideChar(std::string utf8) {
   return result;
 }
 
-Napi::Object CreateEntry(Napi::Env& env, LPWSTR name, LPWSTR type, LPWSTR data, DWORD dataLengthBytes)
+Napi::Object CreateEntry(Napi::Env& env, LPWSTR name, const wchar_t* type, LPWSTR data, DWORD dataLengthBytes)
 {
   // NB: We must verify the data, since there's no guarantee that REG_SZ are stored with null terminators.
 
@@ -64,7 +64,7 @@ Napi::Object CreateEntry(Napi::Env& env, LPWSTR name, LPWSTR type, LPWSTR data, 
   return obj;
 }
 
-Napi::Object CreateEntry(Napi::Env& env, LPWSTR name, LPWSTR type, DWORD data)
+Napi::Object CreateEntry(Napi::Env& env, LPWSTR name, const wchar_t* type, DWORD data)
 {
   auto obj = Napi::Object::New(env);
   obj.Set(Napi::String::New(env, "name"), Napi::String::New(env, (char16_t*)name));
